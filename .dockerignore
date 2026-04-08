@@ -1,0 +1,8 @@
+db.sqlite3
+Media/
+Scripts/Engines/
+Scripts/Networks/
+*.lock
+*.pyc
+__pycache__/
+.git/

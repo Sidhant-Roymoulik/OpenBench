@@ -19,10 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECURITY WARNING: don't run with debug turned on in production!
-SECRET_KEY = '@!zw2l8til1(0eb_nk+1w!(n78gqm&u)s)_v7#k6iseia@g9q0'
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', '@!zw2l8til1(0eb_nk+1w!(n78gqm&u)s)_v7#k6iseia@g9q0')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*'] if DEBUG else [os.environ.get('FLY_APP_NAME', 'lux-openbench') + '.fly.dev']
 
 HTML_MINIFY   = True
 APPEND_SLASH  = True
@@ -37,7 +37,7 @@ PROJECT_PATH  = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'Templates')
 
 MEDIA_URL  = '/Media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'Media'))
 
 INSTALLED_APPS = [
     'OpenBench',
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'OpenSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.environ.get('DB_PATH', os.path.join(BASE_DIR, 'db.sqlite3')),
     }
 }
 
@@ -132,3 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
