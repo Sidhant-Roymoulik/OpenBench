@@ -1,8 +1,9 @@
-db.sqlite3
+fly.toml
+.git/
+*.sqlite3
+Client/
+Scripts/
 Media/
-Scripts/Engines/
-Scripts/Networks/
 *.lock
 *.pyc
 __pycache__/
-.git/
