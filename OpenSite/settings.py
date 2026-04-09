@@ -23,6 +23,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '@!zw2l8til1(0eb_nk+1w!(n78gqm&u)s)_v7
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
 
 ALLOWED_HOSTS = ['*'] if DEBUG else [os.environ.get('FLY_APP_NAME', 'lux-openbench') + '.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('FLY_APP_NAME', 'lux-openbench') + '.fly.dev']
 
 HTML_MINIFY   = True
 APPEND_SLASH  = True
